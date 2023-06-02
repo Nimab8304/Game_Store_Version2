@@ -2,6 +2,7 @@ package ir.ac.kntu;
 
 public class Main {
     public static UserProfile userProfileHandler = new UserProfile();
+
     public static Admin adminHandler = new Admin();
 
     public static UserFriend userFriendHandler = new UserFriend();
