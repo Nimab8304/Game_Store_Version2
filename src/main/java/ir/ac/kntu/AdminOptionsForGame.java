@@ -30,15 +30,16 @@ public class AdminOptionsForGame {
         Scanner scanner = new Scanner(System.in);
         System.out.println("***********************************");
         System.out.print("Name: ");
-        name = scanner.next();
+        name = scanner.nextLine();
         System.out.print("Description: ");
-        description = scanner.next();
+        description = scanner.nextLine();
         genre = chooseGenre();
         System.out.print("Price: ");
         price = scanner.nextFloat();
         System.out.println("***********************************");
         Game newGame=new Game(name,description,genre,price);
         Start.games.add(newGame);
+        Game.saveGameInfos(Start.games);
         System.out.println("Game "+name+" was added successfully :)");
         handleGameForAdmin();
     }
@@ -133,6 +134,7 @@ public class AdminOptionsForGame {
             case 5 -> Main.adminHandler.adminMenu();
             default -> System.out.println("Invalid choice!");
         }
+        Game.saveGameInfos(Start.games);
     }
 
     public  void changeName(Game game){
@@ -198,6 +200,7 @@ public class AdminOptionsForGame {
             }
             Start.games.remove(indexOfGame);
             System.out.println("The game was successfully removed");
+            Game.saveGameInfos(Start.games);
         }
     }
 

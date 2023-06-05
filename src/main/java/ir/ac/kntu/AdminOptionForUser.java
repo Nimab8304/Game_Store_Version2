@@ -72,9 +72,11 @@ public class AdminOptionForUser {
                 break;
             case 2:
                 Start.users.remove(user);
+                User.saveUserInfos(Start.users);
                 break;
             case 3:
                 Main.userProfileHandler.editInformation(user);
+                User.saveUserInfos(Start.users);
                 break;
             case 4:
                 handleUserForAdmin();

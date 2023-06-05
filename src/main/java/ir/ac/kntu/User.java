@@ -2,8 +2,22 @@ package ir.ac.kntu;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.util.ArrayList;
+import java.io.IOException;
+import java.io.Serializable;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.EOFException;
 
-public class User {
+public class User implements Serializable{
     private String username;
 
     private String password;
@@ -13,6 +27,8 @@ public class User {
     private double wallet;
 
     private String phoneNumber;
+
+    private static final long serialVersionUID = 42L;
 
     public  ArrayList<Game> usergames = new ArrayList<>();
 
@@ -138,6 +154,7 @@ public class User {
             User userask = new User(usernameAsk, passwordAsk, emailAsk, 0, phoneAsk);
             Start.users.add(userask);
             System.out.println("user added successfully");
+            saveUserInfos(Start.users);
             Main.adminHandler.goBack();
         } else {
             System.out.println("Sign up was not successful");
@@ -215,5 +232,49 @@ public class User {
             }
         }
         return null;
+    }
+
+    public static ArrayList<User> loadUserInfo() {
+        ArrayList<User> users = new ArrayList<User>();
+        File file = new File("users.info");
+        try (FileInputStream fileInputStream = new FileInputStream(file);
+             ObjectInputStream input = new ObjectInputStream(fileInputStream)) {
+            while (true) {
+                try {
+                    //Read info for each student
+                    User user = (User) input.readObject();
+                    users.add(user);
+                } catch (EOFException e) {
+                    //Reaching end of file
+                    break;
+                } catch (Exception e) {
+                    System.out.println("Problem with some of the records in the student data file");
+                    System.out.println(e.getMessage());
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("No previous data for students has been saved.");
+        }
+        return users;
+    }
+
+    public static void saveUserInfos(ArrayList<User> students) {
+        File file = new File("users.info");
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file);
+             ObjectOutputStream output = new ObjectOutputStream(fileOutputStream)) {
+            for (User user : Start.users) {
+                try {
+                    output.writeObject(user);
+                } catch (IOException e) {
+                    System.out.println("(Student::saveStudentInfos): " +
+                            "An error occurred while trying to save info");
+                    System.out.println(e.getMessage());
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("(Student::saveStudentInfos): " +
+                    "An error occurred while trying to save info");
+            System.out.println(e.getMessage());
+        }
     }
 }
