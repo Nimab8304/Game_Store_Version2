@@ -16,6 +16,8 @@ public class Start {
 
     public static ArrayList<Developer> developers=new ArrayList<>();
 
+    public static ArrayList<Seller> sellers=new ArrayList<>();
+
     public  void adminOrUser(){
         int option;
         Scanner scanner = new Scanner(System.in);
@@ -41,7 +43,7 @@ public class Start {
                 Main.developerMenuHandler.developerSignIn();
                 break;
             case 4:
-                Main.userHandler.userMenu();
+                Main.sellerMenuHandler.sellerSignIn();
                 break;
             case 5:
                 System.exit(0);

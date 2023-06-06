@@ -23,6 +23,8 @@ public class Main {
 
     public static UserLibrary userLibraryHandler = new UserLibrary();
 
+    public static SellerMenu sellerMenuHandler = new SellerMenu();
+
     public static AdminOptionsForGame adminOptionsForGameHandler = new AdminOptionsForGame();
 
     public static AdminOptionForUser adminOptionForUserHandler = new AdminOptionForUser();
@@ -42,8 +44,12 @@ public class Main {
         Start.developers.add(developer);
         BetaGames betaGames=new BetaGames("Fifa24","beta","sport",10,1);
         betaGames.developers.add(developer);
-
+        developer.developerGames.add(betaGames);
         Start.games.add(betaGames);
+        Developer developer1=new Developer("Mamad","Mamad123456");
+        Start.developers.add(developer1);
+        Seller seller=new Seller("Digikala", "654321");
+        Start.sellers.add(seller);
         Controller controller=new Controller("Controller","very good",17,4,"PS5","wireless");
         Start.hardWares.add(controller);
         User user = new User("Abolfazl", "Abolfazl123456", "zxjcbhj@gmail.com", 100, "24525",20);
