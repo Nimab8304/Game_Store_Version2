@@ -28,6 +28,10 @@ public class User implements Serializable{
 
     private String phoneNumber;
 
+    private int point=0;
+
+    public static long  startTime;
+
     private static final long serialVersionUID = 42L;
 
     public  ArrayList<Game> usergames = new ArrayList<>();
@@ -86,12 +90,29 @@ public class User implements Serializable{
         return username;
     }
 
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
     public User(String username, String password, String email, double wallet, String phoneNumber) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.wallet = wallet;
         this.phoneNumber = phoneNumber;
+    }
+
+    public User(String username, String password, String email, double wallet, String phoneNumber, int point) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.wallet = wallet;
+        this.phoneNumber = phoneNumber;
+        this.point = point;
     }
 
     public  void userMenu() {
@@ -133,6 +154,7 @@ public class User implements Serializable{
         passwordAsk = scanner.next();
         if (checkForSignIN(usernameAsk, passwordAsk)) {
             User userSignedIn = saveSignInUser(usernameAsk, passwordAsk);
+            startTime = System.currentTimeMillis();
             saveUserInfos(Start.users);
             Main.userMenuHandler.accountOptions(userSignedIn);
         } else {

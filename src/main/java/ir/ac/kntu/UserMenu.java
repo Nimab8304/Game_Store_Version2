@@ -27,6 +27,10 @@ public class UserMenu {
             case 4:
                 Main.userFriendHandler.handleFriends(user);
             case 5:
+                long endTime = System.currentTimeMillis();
+                long elapsedTime = (endTime - User.startTime)/1000;
+                user.setPoint((int) (user.getPoint()+(elapsedTime/5)));
+                System.out.println("Received Point: "+elapsedTime/5);
                 Main.userHandler.userMenu();
             default:
                 System.out.println("Invalid choice!");

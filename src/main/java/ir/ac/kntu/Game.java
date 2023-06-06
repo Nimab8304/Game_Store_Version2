@@ -25,6 +25,8 @@ public class Game implements Serializable {
 
     private double price;
 
+    private int level;
+
     private static final long serialVersionUID = 42L;
 
     public void setName(String name) {
@@ -48,13 +50,20 @@ public class Game implements Serializable {
     public HashMap<String, Double> rates = new HashMap<>();
 
 
+    public Game(String name, String description, String genres, double price,int level) {
+        this.name = name;
+        this.description = description;
+        this.genres = genres;
+        this.price = price;
+        this.level=level;
+    }
+
     public Game(String name, String description, String genres, double price) {
         this.name = name;
         this.description = description;
         this.genres = genres;
         this.price = price;
     }
-
 
     public String getDescription() {
         return description;
@@ -114,5 +123,13 @@ public class Game implements Serializable {
                     "An error occurred while trying to save info");
             System.out.println(e.getMessage());
         }
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

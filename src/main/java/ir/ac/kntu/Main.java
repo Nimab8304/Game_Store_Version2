@@ -33,13 +33,13 @@ public class Main {
         Start.hardWares.add(monitor);
         Controller controller=new Controller("controller","very good",17,4,"PS5","wireless");
         Start.hardWares.add(controller);
-        User user = new User("Abolfazl", "Abolfazl123456", "zxjcbhj@gmail.com", 100, "24525");
+        User user = new User("Abolfazl", "Abolfazl123456", "zxjcbhj@gmail.com", 100, "24525",20);
         Start.users.add(user);
         User user1 = new User("Shahram", "Shah123456", "zxyuybbhj@gmail.com", 130, "2125");
         Start.users.add(user1);
-        Game game = new Game("Pes2017", "you can play it with your friends", "action", 30);
-        Game game1 = new Game("Need For Speed", "looking for adrenalin", "Racing", 45);
-        Game game2 = new Game("Counter", "A shooter game", "Shooter", 27);
+        Game game = new Game("Pes2017", "you can play it with your friends", "action", 30,1);
+        Game game1 = new Game("Need For Speed", "looking for adrenalin", "Racing", 45,2);
+        Game game2 = new Game("Counter", "A shooter game", "Shooter", 27,3);
         //user.friends.add(user1);
         Start.games.add(game);
         Start.games.add(game1);

@@ -100,8 +100,15 @@ public class UserLibrary {
             System.out.println("Name: " + game.get(option - 1).getName());
             System.out.println("Description: " + game.get(option - 1).getDescription());
             System.out.println("genres: " + game.get(option - 1).getGenres());
-            System.out.println("Price: " + game.get(option - 1).getPrice());
-            System.out.println("Rate: " + countRates(game.get(option - 1)));
+            if (user.getPoint() >= 20) {
+                System.out.println("Price: " + (game.get(option - 1).getPrice() * 9) / 10);
+            } else if (user.getPoint() >= 50) {
+                System.out.println("Price: " + (game.get(option - 1).getPrice() * 8) / 10);
+            } else if (user.getPoint() >= 50) {
+                System.out.println("Price: " + (game.get(option - 1).getPrice() * 7) / 10);
+            }else {
+                System.out.println("Rate: " + countRates(game.get(option - 1)));
+            }
         } else {
             int test = option - Start.games.size();
             if (Start.hardWares.get(test - 1) instanceof Monitor) {

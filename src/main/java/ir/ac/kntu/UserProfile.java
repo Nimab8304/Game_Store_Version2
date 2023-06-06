@@ -38,6 +38,7 @@ public class UserProfile {
         System.out.println("Password: " + user.getPassword());
         System.out.println("Email: " + user.getEmail());
         System.out.println("Phone number: " + user.getPhoneNumber());
+        System.out.println("Point: " + user.getPoint());
     }
 
     public  void editInformation(User user) {
