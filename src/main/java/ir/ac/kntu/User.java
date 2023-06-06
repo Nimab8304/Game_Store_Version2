@@ -241,7 +241,7 @@ public class User implements Serializable{
         return true;
     }
 
-    public  boolean checkForSignIN(String username, String password) {
+    public boolean checkForSignIN(String username, String password) {
         for (User user : Start.users) {
             if (user.getUsername().equals(username.trim()) && user.getPassword().equals(password.trim())) {
                 return true;

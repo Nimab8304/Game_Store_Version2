@@ -8,6 +8,8 @@ public class Start {
 
     public static ArrayList<User> users = new ArrayList<>();
 
+    public  ArrayList<Admin> admins = new ArrayList<>();
+
     public static ArrayList<Game> games=new ArrayList<>();
 
     public static ArrayList<HardWare> hardWares=new ArrayList<>();

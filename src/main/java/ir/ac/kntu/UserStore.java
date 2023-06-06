@@ -126,6 +126,7 @@ public class UserStore {
                 sorted.add(game);
             }
         }
+
         if (sorted.isEmpty()) {
             System.out.println("No item found :(");
             handleStore(user);

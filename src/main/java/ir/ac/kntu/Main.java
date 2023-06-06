@@ -25,13 +25,18 @@ public class Main {
 
     public static AdminOptionForUser adminOptionForUserHandler = new AdminOptionForUser();
 
+    public static AdminOptionsForAccessories adminOptionsForAccessories=new AdminOptionsForAccessories();
+
     public static void main(String[] args) {
 //        Start.users = User.loadUserInfo();
 //        Start.games = Game.loadGameInfo();
         Admin admin = new Admin("Nima", "123456");
+        startHandler.admins.add(admin);
+        Admin admin1 = new Admin("Amir", "1234567");
+        startHandler.admins.add(admin1);
         Monitor monitor=new Monitor("monitor","perfect",48,5,15,144,1);
         Start.hardWares.add(monitor);
-        Controller controller=new Controller("controller","very good",17,4,"PS5","wireless");
+        Controller controller=new Controller("Controller","very good",17,4,"PS5","wireless");
         Start.hardWares.add(controller);
         User user = new User("Abolfazl", "Abolfazl123456", "zxjcbhj@gmail.com", 100, "24525",20);
         Start.users.add(user);

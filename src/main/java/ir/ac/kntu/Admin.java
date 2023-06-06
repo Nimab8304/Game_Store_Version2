@@ -4,37 +4,51 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Admin {
-    private static String username;
+    private String username;
 
-    private static String password;
+    private String password;
 
     public Admin(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Admin() {
     }
 
-    public  void adminLogin() {
+    public void adminLogin() {
         String usernameAsk, passwordAsk;
         Scanner scanner = new Scanner(System.in);
         System.out.print("Username: ");
         usernameAsk = scanner.next();
         System.out.print("password: ");
         passwordAsk = scanner.next();
-        if (!usernameAsk.equals(username)) {
-            System.out.println("Username is wrong");
-            goBack();
-
-        } else if (!passwordAsk.equals(password)) {
-            System.out.println("Password is wrong");
+        if (checkForSignIN(usernameAsk, passwordAsk)) {
+            adminMenu();
+        } else {
+            System.out.println("Admin does not exist :(");
             goBack();
         }
-        adminMenu();
+
     }
 
-    public  void goBack() {
+    public void goBack() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Do you want to try again:(y/n) ");
         String answer;
@@ -46,11 +60,13 @@ public class Admin {
         }
     }
 
-    public  void adminMenu() {
+    public void adminMenu() {
         System.out.println("***********************************");
         System.out.println("1-Users");
         System.out.println("2-Games");
-        System.out.println("3-Back");
+        System.out.println("3-Accessories");
+        System.out.println("4-Profile");
+        System.out.println("5-Back");
         System.out.println("***********************************");
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please select your choice: ");
@@ -61,6 +77,12 @@ public class Admin {
             case 2:
                 Main.adminOptionsForGameHandler.handleGameForAdmin();
             case 3:
+                Main.adminOptionsForAccessories.findAccessoriesWithName();
+                break;
+            case 4:
+
+                break;
+            case 5:
                 Main.startHandler.adminOrUser();
                 break;
             default:
@@ -69,6 +91,14 @@ public class Admin {
         }
     }
 
+    public boolean checkForSignIN(String username, String password) {
+        for (Admin admin : Main.startHandler.admins) {
+            if (admin.getUsername().equals(username.trim()) && admin.getPassword().equals(password.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }
