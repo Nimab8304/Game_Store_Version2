@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserLibrary {
-    public  void handleLibrary(User user) {
+    public void handleLibrary(User user) {
         System.out.println("***********************************");
         System.out.println("Library options:");
         System.out.println("1-My games");
@@ -35,35 +35,35 @@ public class UserLibrary {
         }
     }
 
-    public  void showUserGames(User user) {
+    public void showUserGames(User user) {
         int i = 1;
         System.out.println("***********************************");
         for (Game game : user.usergames) {
-            for (int j = 0; j < game.getName().length()+4; j++) {
+            for (int j = 0; j < game.getName().length() + 4; j++) {
                 System.out.print("*");
             }
             System.out.print("\n");
-            System.out.println("*"+i + "-" + game.getName()+"*");
-            for (int j = 0; j < game.getName().length()+4; j++) {
+            System.out.println("*" + i + "-" + game.getName() + "*");
+            for (int j = 0; j < game.getName().length() + 4; j++) {
                 System.out.print("*");
             }
             System.out.print("\n");
             i++;
         }
         for (HardWare hardWare : user.userHardWares) {
-            for (int j = 0; j < hardWare.getName().length()+4; j++) {
+            for (int j = 0; j < hardWare.getName().length() + 4; j++) {
                 System.out.print("-");
             }
             System.out.print("\n");
-            System.out.println("|"+i + "-" + hardWare.getName()+"|");
-            for (int j = 0; j < hardWare.getName().length()+4; j++) {
+            System.out.println("|" + i + "-" + hardWare.getName() + "|");
+            for (int j = 0; j < hardWare.getName().length() + 4; j++) {
                 System.out.print("-");
             }
             System.out.print("\n");
             i++;
         }
         System.out.println("***********************************");
-        if (user.usergames.isEmpty()&&user.userHardWares.isEmpty()) {
+        if (user.usergames.isEmpty() && user.userHardWares.isEmpty()) {
             System.out.println("You do not have any games");
             handleLibrary(user);
         } else {
@@ -71,40 +71,39 @@ public class UserLibrary {
         }
     }
 
-    public  void showUserGamesInformation(User user, ArrayList<Game> game) {
+    public void showUserGamesInformation(User user, ArrayList<Game> game) {
         int option = showSpecificGameInformation(user, game);
         rateAndComment(user, game.get(option - 1));
         Main.userMenuHandler.accountOptions(user);
     }
 
-    public  void showUserGamesInformationInLibrary(User user, ArrayList<Game> game) {
+    public void showUserGamesInformationInLibrary(User user, ArrayList<Game> game) {
         int option = showSpecificGameInformationInLibrary(user, game);
-        if (user.usergames.isEmpty()){
+        if (user.usergames.isEmpty()) {
             rateAndCommentForHardWare(user, user.userHardWares.get(option - 1));
-        }else {
-            if (option<=user.usergames.size()) {
+        } else {
+            if (option <= user.usergames.size()) {
                 rateAndComment(user, game.get(option - 1));
-            }else {
-                option=option-user.usergames.size();
+            } else {
+                option = option - user.usergames.size();
                 rateAndCommentForHardWare(user, user.userHardWares.get(option - 1));
             }
         }
         Main.userMenuHandler.accountOptions(user);
     }
 
-    public  int showSpecificGameInformation(User user, ArrayList<Game> game) {
+    public int showSpecificGameInformation(User user, ArrayList<Game> game) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please select the item you want: ");
         int option = scanner.nextInt();
-        if (option<=Start.games.size()) {
+        if (option <= Start.games.size()) {
             System.out.println("Name: " + game.get(option - 1).getName());
             System.out.println("Description: " + game.get(option - 1).getDescription());
             System.out.println("genres: " + game.get(option - 1).getGenres());
             System.out.println("Price: " + game.get(option - 1).getPrice());
             System.out.println("Rate: " + countRates(game.get(option - 1)));
-        }
-        else {
-            int test=option-Start.games.size();
+        } else {
+            int test = option - Start.games.size();
             if (Start.hardWares.get(test - 1) instanceof Monitor) {
                 System.out.println("Name: " + Start.hardWares.get(test - 1).getName());
                 System.out.println("Description: " + Start.hardWares.get(test - 1).getDescription());
@@ -125,19 +124,20 @@ public class UserLibrary {
         }
         return option;
     }
-    public  int showSpecificGameInformationInLibrary(User user, ArrayList<Game> game) {
+
+
+    public int showSpecificGameInformationInLibrary(User user, ArrayList<Game> game) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please select the item you want: ");
         int option = scanner.nextInt();
-        if (option<=user.usergames.size()) {
+        if (option <= user.usergames.size()) {
             System.out.println("Name: " + game.get(option - 1).getName());
             System.out.println("Description: " + game.get(option - 1).getDescription());
             System.out.println("genres: " + game.get(option - 1).getGenres());
             System.out.println("Price: " + game.get(option - 1).getPrice());
             System.out.println("Rate: " + countRates(game.get(option - 1)));
-        }
-        else {
-            int test=option-user.usergames.size();
+        } else {
+            int test = option - user.usergames.size();
             if (user.userHardWares.get(test - 1) instanceof Monitor) {
                 System.out.println("Name: " + user.userHardWares.get(test - 1).getName());
                 System.out.println("Description: " + user.userHardWares.get(test - 1).getDescription());
@@ -159,7 +159,8 @@ public class UserLibrary {
         return option;
     }
 
-    public  double countRates(Game game) {
+
+    public double countRates(Game game) {
         double sum = 0;
         if (!game.rates.isEmpty()) {
             for (double rate : game.rates.values()) {
@@ -170,11 +171,11 @@ public class UserLibrary {
         return sum;
     }
 
-    public  void addRates(User user, double rate, Game game) {
+    public void addRates(User user, double rate, Game game) {
         game.rates.put(user.getUsername(), rate);
     }
 
-    public  void rateAndComment(User user, Game game) {
+    public void rateAndComment(User user, Game game) {
         System.out.println("1-Rate");
         System.out.println("2-Community");
         System.out.print("Please select your choice: ");
@@ -187,7 +188,7 @@ public class UserLibrary {
         }
     }
 
-    public  void rateAndCommentForHardWare(User user, HardWare game) {
+    public void rateAndCommentForHardWare(User user, HardWare game) {
         System.out.println("1-Community");
         System.out.print("Please select your choice: ");
         Scanner scanner = new Scanner(System.in);
@@ -198,7 +199,7 @@ public class UserLibrary {
         }
     }
 
-    public  void handdleRate(User user, Game game) {
+    public void handdleRate(User user, Game game) {
         double rate;
         Scanner scanner = new Scanner(System.in);
         System.out.print("Rate: ");
@@ -207,7 +208,7 @@ public class UserLibrary {
         Main.userMenuHandler.accountOptions(user);
     }
 
-    public  void showComment(User user, Game game) {
+    public void showComment(User user, Game game) {
         Scanner scanner = new Scanner(System.in);
         int i = 1;
         if (game.comments.isEmpty()) {
@@ -228,7 +229,7 @@ public class UserLibrary {
         }
     }
 
-    public  void showCommentOfHardWare(User user, HardWare game) {
+    public void showCommentOfHardWare(User user, HardWare game) {
         Scanner scanner = new Scanner(System.in);
         int i = 1;
         if (game.comments.isEmpty()) {
@@ -249,7 +250,7 @@ public class UserLibrary {
         }
     }
 
-    public  void addComments(User user, Game game) {
+    public void addComments(User user, Game game) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your comment: ");
         String comment = scanner.nextLine();
@@ -257,7 +258,7 @@ public class UserLibrary {
         Main.userMenuHandler.accountOptions(user);
     }
 
-    public  void addCommentsToHardWare(User user, HardWare game) {
+    public void addCommentsToHardWare(User user, HardWare game) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your comment: ");
         String comment = scanner.nextLine();
