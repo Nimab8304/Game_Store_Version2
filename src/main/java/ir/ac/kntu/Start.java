@@ -10,6 +10,8 @@ public class Start {
 
     public static ArrayList<Game> games=new ArrayList<>();
 
+    public static ArrayList<HardWare> hardWares=new ArrayList<>();
+
     public  void adminOrUser(){
         int option;
         Scanner scanner = new Scanner(System.in);

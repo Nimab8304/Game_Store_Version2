@@ -43,7 +43,27 @@ public class UserStore {
             int i = 1;
             System.out.println("***********************************");
             for (Game game : Start.games) {
-                System.out.println(i + "-" + game.getName());
+                for (int j = 0; j < game.getName().length()+4; j++) {
+                    System.out.print("*");
+                }
+                System.out.print("\n");
+                System.out.println("*"+i + "-" + game.getName()+"*");
+                for (int j = 0; j < game.getName().length()+4; j++) {
+                    System.out.print("*");
+                }
+                System.out.print("\n");
+                i++;
+            }
+            for (HardWare hardWare : Start.hardWares) {
+                for (int j = 0; j < hardWare.getName().length()+4; j++) {
+                    System.out.print("-");
+                }
+                System.out.print("\n");
+                System.out.println("|"+i + "-" + hardWare.getName()+"|");
+                for (int j = 0; j < hardWare.getName().length()+4; j++) {
+                    System.out.print("-");
+                }
+                System.out.print("\n");
                 i++;
             }
             System.out.println("***********************************");
@@ -64,6 +84,28 @@ public class UserStore {
                 user.setWallet(user.getWallet() - game.getPrice());
                 user.usergames.add(game);
                 System.out.println("The game has been added successfully :)");
+            }
+        } else if (answer.trim().equals("n")) {
+            Main.userMenuHandler.accountOptions(user);
+        }
+    }
+
+    public  void addHardWareToUserAccount(User user, HardWare hardWare) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to add this game to your account:(y/n) ");
+        String answer;
+        answer = scanner.next();
+        if (answer.trim().equals("y")) {
+            if (user.getWallet() < hardWare.getPrice()) {
+                System.out.println("The account balance is not enough");
+                Main.userProfileHandler.userProfile(user);
+            } else if (hardWare.getCount()==0) {
+                System.out.println("This item is not available :(");
+            } else {
+                user.setWallet(user.getWallet() - hardWare.getPrice());
+                user.userHardWares.add(hardWare);
+                System.out.println("The item has been added successfully :)");
+                hardWare.setCount(hardWare.getCount()-1);
             }
         } else if (answer.trim().equals("n")) {
             Main.userMenuHandler.accountOptions(user);
@@ -98,12 +140,17 @@ public class UserStore {
 
     public  void showGamesInformation(User user, ArrayList<Game> game) {
         int option = Main.userLibraryHandler.showSpecificGameInformation(user, game);
-        if (!user.usergames.contains(game.get(option - 1))) {
-            System.out.println("you can buy this game");
-            addGameToUserAccount(user, game.get(option - 1));
-        } else {
-            Main.userLibraryHandler.rateAndComment(user, game.get(option - 1));
-            Main.userMenuHandler.accountOptions(user);
+        if (option<=Start.games.size()) {
+            if (!user.usergames.contains(game.get(option - 1))) {
+                System.out.println("you can buy this game");
+                addGameToUserAccount(user, game.get(option - 1));
+            } else {
+                Main.userLibraryHandler.rateAndComment(user, game.get(option - 1));
+                Main.userMenuHandler.accountOptions(user);
+            }
+        }else {
+            option=option-Start.games.size();
+            addHardWareToUserAccount(user, Start.hardWares.get(option - 1));
         }
         Main.userMenuHandler.accountOptions(user);
     }

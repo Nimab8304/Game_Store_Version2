@@ -32,6 +32,8 @@ public class User implements Serializable{
 
     public  ArrayList<Game> usergames = new ArrayList<>();
 
+    public  ArrayList<HardWare> userHardWares = new ArrayList<>();
+
     public ArrayList<User> friends = new ArrayList<>();
 
     public ArrayList<User> request = new ArrayList<>();
@@ -131,6 +133,7 @@ public class User implements Serializable{
         passwordAsk = scanner.next();
         if (checkForSignIN(usernameAsk, passwordAsk)) {
             User userSignedIn = saveSignInUser(usernameAsk, passwordAsk);
+            saveUserInfos(Start.users);
             Main.userMenuHandler.accountOptions(userSignedIn);
         } else {
             System.out.println("user does not exist");
