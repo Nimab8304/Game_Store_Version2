@@ -40,10 +40,10 @@ public class Admin {
         System.out.print("password: ");
         passwordAsk = scanner.next();
         if (checkForSignIN(usernameAsk, passwordAsk)) {
-            adminMenu();
+            Admin adminSignIn = saveSignInAdmin(usernameAsk, passwordAsk);
+            adminMenu(adminSignIn);
         } else {
-            System.out.println("Admin does not exist :(");
-            goBack();
+            System.out.println("Admin does not exist");
         }
 
     }
@@ -60,7 +60,7 @@ public class Admin {
         }
     }
 
-    public void adminMenu() {
+    public void adminMenu(Admin admin) {
         System.out.println("***********************************");
         System.out.println("1-Users");
         System.out.println("2-Games");
@@ -73,14 +73,15 @@ public class Admin {
         int option = scanner.nextInt();
         switch (option) {
             case 1:
-                Main.adminOptionForUserHandler.handleUserForAdmin();
+                Main.adminOptionForUserHandler.handleUserForAdmin(admin);
             case 2:
-                Main.adminOptionsForGameHandler.handleGameForAdmin();
+                Main.adminOptionsForGameHandler.handleGameForAdmin(admin);
             case 3:
-                Main.adminOptionsForAccessories.findAccessoriesWithName();
+                Main.adminOptionsForAccessories.findAccessoriesWithName(admin);
                 break;
             case 4:
-
+                showProfile(admin);
+                adminMenu(admin);
                 break;
             case 5:
                 Main.startHandler.adminOrUser();
@@ -100,5 +101,18 @@ public class Admin {
         return false;
     }
 
+    public void showProfile(Admin admin) {
+        System.out.println("Username: " + admin.getUsername());
+        System.out.println("Password: " + admin.getPassword());
+    }
+
+    public Admin saveSignInAdmin(String username, String password) {
+        for (Admin admin : Main.startHandler.admins) {
+            if (admin.getUsername().equals(username.trim()) && admin.getPassword().equals(password.trim())) {
+                return admin;
+            }
+        }
+        return null;
+    }
 
 }

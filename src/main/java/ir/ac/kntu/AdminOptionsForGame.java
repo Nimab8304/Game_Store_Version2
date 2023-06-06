@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class AdminOptionsForGame {
 
-    public void handleGameForAdmin() {
+    public void handleGameForAdmin(Admin admin) {
         System.out.println("***********************************");
         System.out.println("1-Add Game");
         System.out.println("2-Edit Game");
@@ -16,15 +16,15 @@ public class AdminOptionsForGame {
         System.out.print("Please select your choice: ");
         int option = scanner.nextInt();
         switch (option) {
-            case 1 -> addGame();
-            case 2 -> findGameToEdit();
+            case 1 -> addGame(admin);
+            case 2 -> findGameToEdit(admin);
             case 3 -> findGameToRemove();
-            case 4 -> Main.adminHandler.adminMenu();
+            case 4 -> Main.adminHandler.adminMenu(admin);
             default -> System.out.println("Invalid choice!");
         }
     }
 
-    public void addGame() {
+    public void addGame(Admin admin) {
         String name, description, genre;
         double price;
         Scanner scanner = new Scanner(System.in);
@@ -33,7 +33,7 @@ public class AdminOptionsForGame {
         name = scanner.nextLine();
         System.out.print("Description: ");
         description = scanner.nextLine();
-        genre = chooseGenre();
+        genre = chooseGenre(admin);
         System.out.print("Price: ");
         price = scanner.nextFloat();
         System.out.println("***********************************");
@@ -41,10 +41,10 @@ public class AdminOptionsForGame {
         Start.games.add(newGame);
         Game.saveGameInfos(Start.games);
         System.out.println("Game " + name + " was added successfully :)");
-        handleGameForAdmin();
+        handleGameForAdmin(admin);
     }
 
-    public String chooseGenre() {
+    public String chooseGenre(Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("***************Genre***************");
         System.out.println("1-Action     2-Strategy    3-Racing");
@@ -86,7 +86,7 @@ public class AdminOptionsForGame {
         return null;
     }
 
-    public void findGameToEdit() {
+    public void findGameToEdit(Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Insert the text you want to search with: ");
         String answer;
@@ -111,11 +111,11 @@ public class AdminOptionsForGame {
             System.out.print("Please select the game you want: ");
             int option = scanner.nextInt();
             Game editNeeded = Start.games.get(index.get(option - 1));
-            editGame(editNeeded);
+            editGame(editNeeded,admin);
         }
     }
 
-    public void editGame(Game game) {
+    public void editGame(Game game,Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("***********************************");
         System.out.println("1-Edit name");
@@ -127,44 +127,44 @@ public class AdminOptionsForGame {
         System.out.print("Please select your choice: ");
         int option = scanner.nextInt();
         switch (option) {
-            case 1 -> changeName(game);
-            case 2 -> changeDescription(game);
-            case 3 -> changeGenre(game);
-            case 4 -> changePrice(game);
-            case 5 -> Main.adminHandler.adminMenu();
+            case 1 -> changeName(game,admin);
+            case 2 -> changeDescription(game,admin);
+            case 3 -> changeGenre(game,admin);
+            case 4 -> changePrice(game,admin);
+            case 5 -> Main.adminHandler.adminMenu(admin);
             default -> System.out.println("Invalid choice!");
         }
         Game.saveGameInfos(Start.games);
     }
 
-    public void changeName(Game game) {
+    public void changeName(Game game,Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter new name: ");
         String newname = scanner.nextLine();
         game.setName(newname);
-        Main.adminHandler.adminMenu();
+        Main.adminHandler.adminMenu(admin);
     }
 
-    public void changeDescription(Game game) {
+    public void changeDescription(Game game,Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter new Description: ");
         String newDescription = scanner.nextLine();
         game.setDescription(newDescription);
-        Main.adminHandler.adminMenu();
+        Main.adminHandler.adminMenu(admin);
     }
 
-    public void changePrice(Game game) {
+    public void changePrice(Game game,Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter new Price: ");
         double newPrice = scanner.nextDouble();
         game.setPrice(newPrice);
-        Main.adminHandler.adminMenu();
+        Main.adminHandler.adminMenu(admin);
     }
 
-    public void changeGenre(Game game) {
-        String newGenre = chooseGenre();
+    public void changeGenre(Game game,Admin admin) {
+        String newGenre = chooseGenre(admin);
         game.setGenres(newGenre);
-        Main.adminHandler.adminMenu();
+        Main.adminHandler.adminMenu(admin);
     }
 
     public void findGameToRemove() {

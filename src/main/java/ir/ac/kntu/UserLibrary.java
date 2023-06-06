@@ -106,7 +106,7 @@ public class UserLibrary {
                 System.out.println("Price: " + (game.get(option - 1).getPrice() * 8) / 10);
             } else if (user.getPoint() >= 50) {
                 System.out.println("Price: " + (game.get(option - 1).getPrice() * 7) / 10);
-            }else {
+            } else {
                 System.out.println("Rate: " + countRates(game.get(option - 1)));
             }
         } else {
@@ -183,15 +183,26 @@ public class UserLibrary {
     }
 
     public void rateAndComment(User user, Game game) {
-        System.out.println("1-Rate");
-        System.out.println("2-Community");
-        System.out.print("Please select your choice: ");
-        Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        switch (option) {
-            case 1 -> handdleRate(user, game);
-            case 2 -> showComment(user, game);
-            default -> System.out.println("Invalid choice!");
+        if (game instanceof BetaGames) {
+            System.out.println("1-Feedback");
+            System.out.print("Please select your choice: ");
+            Scanner scanner = new Scanner(System.in);
+            int option = scanner.nextInt();
+            switch (option) {
+                case 1 -> handdleFeedBack(user, (BetaGames) game);
+                default -> System.out.println("Invalid choice!");
+            }
+        } else {
+            System.out.println("1-Rate");
+            System.out.println("2-Community");
+            System.out.print("Please select your choice: ");
+            Scanner scanner = new Scanner(System.in);
+            int option = scanner.nextInt();
+            switch (option) {
+                case 1 -> handdleRate(user, game);
+                case 2 -> showComment(user, game);
+                default -> System.out.println("Invalid choice!");
+            }
         }
     }
 
@@ -271,5 +282,15 @@ public class UserLibrary {
         String comment = scanner.nextLine();
         game.comments.put(user.getUsername(), comment);
         Main.userMenuHandler.accountOptions(user);
+    }
+
+    public void handdleFeedBack(User user,BetaGames game){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your feedback: ");
+        String feedback = scanner.nextLine();
+        for (Developer developer:game.developers) {
+            developer.feedbacks.put(user.getUsername()+ " about "+game.getName(),feedback);
+        }
+        System.out.println("Your feed back has been sent to the developer");
     }
 }

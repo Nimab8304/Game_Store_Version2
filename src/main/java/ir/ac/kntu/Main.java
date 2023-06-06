@@ -19,6 +19,8 @@ public class Main {
 
     public static Start startHandler = new Start();
 
+    public static DeveloperMenu developerMenuHandler = new DeveloperMenu();
+
     public static UserLibrary userLibraryHandler = new UserLibrary();
 
     public static AdminOptionsForGame adminOptionsForGameHandler = new AdminOptionsForGame();
@@ -36,6 +38,12 @@ public class Main {
         startHandler.admins.add(admin1);
         Monitor monitor=new Monitor("monitor","perfect",48,5,15,144,1);
         Start.hardWares.add(monitor);
+        Developer developer=new Developer("Ali","Abasi123456");
+        Start.developers.add(developer);
+        BetaGames betaGames=new BetaGames("Fifa24","beta","sport",10,1);
+        betaGames.developers.add(developer);
+
+        Start.games.add(betaGames);
         Controller controller=new Controller("Controller","very good",17,4,"PS5","wireless");
         Start.hardWares.add(controller);
         User user = new User("Abolfazl", "Abolfazl123456", "zxjcbhj@gmail.com", 100, "24525",20);

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class AdminOptionForUser {
 
-    public  void handleUserForAdmin() {
+    public  void handleUserForAdmin(Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("***********************************");
         System.out.println("1-Search with username");
@@ -16,16 +16,16 @@ public class AdminOptionForUser {
         int option = scanner.nextInt();
         switch (option) {
             case 1:
-                findUserWithUsername();
+                findUserWithUsername(admin);
                 break;
             case 2:
-                findUserWithPhoneNumber();
+                findUserWithPhoneNumber(admin);
                 break;
             case 3:
-                findUserWithEmail();
+                findUserWithEmail(admin);
                 break;
             case 4:
-                Main.adminHandler.adminMenu();
+                Main.adminHandler.adminMenu(admin);
                 break;
             default:
                 System.out.println("Invalid choice!");
@@ -33,7 +33,7 @@ public class AdminOptionForUser {
         }
     }
 
-    public  void findUserWithUsername() {
+    public  void findUserWithUsername(Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Insert the username you want to search with: ");
         String answer;
@@ -50,12 +50,12 @@ public class AdminOptionForUser {
             System.out.println("No item found :(");
         } else {
             if (editneeded != null) {
-                userOptions(editneeded);
+                userOptions(editneeded,admin);
             }
         }
     }
 
-    public  void userOptions(User user) {
+    public  void userOptions(User user,Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("***********************************");
         System.out.println("1-User's informations");
@@ -68,7 +68,7 @@ public class AdminOptionForUser {
         switch (option) {
             case 1:
                 Main.userProfileHandler.showInformation(user);
-                handleUserForAdmin();
+                handleUserForAdmin(admin);
                 break;
             case 2:
                 Start.users.remove(user);
@@ -79,7 +79,7 @@ public class AdminOptionForUser {
                 User.saveUserInfos(Start.users);
                 break;
             case 4:
-                handleUserForAdmin();
+                handleUserForAdmin(admin);
                 break;
             default:
                 System.out.println("Invalid choice!");
@@ -87,7 +87,7 @@ public class AdminOptionForUser {
         }
     }
 
-    public  void findUserWithPhoneNumber() {
+    public  void findUserWithPhoneNumber(Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Insert the phone-number you want to search with: ");
         String answer;
@@ -104,12 +104,12 @@ public class AdminOptionForUser {
             System.out.println("No item found :(");
         } else {
             if (editneeded != null) {
-                userOptions(editneeded);
+                userOptions(editneeded,admin);
             }
         }
     }
 
-    public  void findUserWithEmail() {
+    public  void findUserWithEmail(Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Insert the Email you want to search with: ");
         String answer;
@@ -126,7 +126,7 @@ public class AdminOptionForUser {
             System.out.println("No item found :(");
         } else {
             if (editneeded != null) {
-                userOptions(editneeded);
+                userOptions(editneeded,admin);
             }
         }
     }

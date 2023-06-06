@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class AdminOptionsForAccessories {
 
-    public void findAccessoriesWithName() {
+    public void findAccessoriesWithName(Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Insert the name you want to search with: ");
         String answer;
@@ -21,12 +21,12 @@ public class AdminOptionsForAccessories {
             System.out.println("No item found :(");
         } else {
             if (editneeded != null) {
-                hardWareOptions(editneeded);
+                hardWareOptions(editneeded,admin);
             }
         }
     }
 
-    public void hardWareOptions(HardWare hardWare) {
+    public void hardWareOptions(HardWare hardWare,Admin admin) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("***********************************");
         System.out.println("1-Hardware's informations");
@@ -39,19 +39,19 @@ public class AdminOptionsForAccessories {
         switch (option) {
             case 1:
                 hardWareInformation(hardWare);
-                Main.adminHandler.adminMenu();
+                Main.adminHandler.adminMenu(admin);
                 break;
             case 2:
                 Start.hardWares.remove(hardWare);
                 System.out.println("Hardware was removed successfully");
-                Main.adminHandler.adminMenu();
+                Main.adminHandler.adminMenu(admin);
                 break;
             case 3:
                 editInformation(hardWare);
-                Main.adminHandler.adminMenu();
+                Main.adminHandler.adminMenu(admin);
                 break;
             case 4:
-                Main.adminHandler.adminMenu();
+                Main.adminHandler.adminMenu(admin);
                 break;
             default:
                 System.out.println("Invalid choice!");

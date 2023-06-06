@@ -14,6 +14,8 @@ public class Start {
 
     public static ArrayList<HardWare> hardWares=new ArrayList<>();
 
+    public static ArrayList<Developer> developers=new ArrayList<>();
+
     public  void adminOrUser(){
         int option;
         Scanner scanner = new Scanner(System.in);
@@ -21,7 +23,9 @@ public class Start {
         System.out.println("Login options:");
         System.out.println("1-Admin");
         System.out.println("2-User");
-        System.out.println("3-Exit.");
+        System.out.println("3-Developer");
+        System.out.println("4-Seller");
+        System.out.println("5-Exit.");
         System.out.println("***********************************");
         System.out.print("Please select your choice: ");
 
@@ -34,6 +38,12 @@ public class Start {
                 Main.userHandler.userMenu();
                 break;
             case 3:
+                Main.developerMenuHandler.developerSignIn();
+                break;
+            case 4:
+                Main.userHandler.userMenu();
+                break;
+            case 5:
                 System.exit(0);
             default:
                 System.out.println("Invalid choice!");
